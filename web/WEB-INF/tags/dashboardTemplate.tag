@@ -25,7 +25,7 @@
 
     <jsp:body>
         <div id="wrapper">
-            <t:navigation/>
+            <t:navigation title="${ptitle}"/>
 
             <div id="page-wrapper">
                 <div class="row">
