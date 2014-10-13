@@ -17,6 +17,8 @@
     <global-forwards>
         
         <forward name="index"  path="/Index.do"/>
+        <forward name="adminindex"  path="/AdminIndex.do"/>
+        <forward name="calendar"  path="/Calendar.do"/>
         <forward name="attendance"  path="/Attendance.do"/>
         <forward name="login"  path="/Login.do"/>
         <forward name="logout"  path="/Logout.do"/>
@@ -26,10 +28,17 @@
     <action-mappings>
         
         <action path="/Index" forward="/indexStruts.jsp"/>
+        <action path="/AdminIndex" scope="request" type="com.arekar.attendance.struts.actions.AdminDashboardAction">
+            <forward name="success" path="/adminIndexStruts.jsp" />
+        </action>
         <action path="/Failure" forward="/failure.jsp"/>
         <action path="/Attendance" forward="/attendanceStruts.jsp"/>
+        <action path="/Calendar" scope="session" type="com.arekar.attendance.struts.actions.PrintHorarioMaestroAction">
+            <forward name="success" path="/calendarStruts.jsp" />
+        </action>
         <action input="/welcomeStruts.jsp" name="LoginForm" path="/Login" scope="session" type="com.arekar.attendance.struts.actions.LoginAction">
             <forward name="success" path="/Index.do" />
+            <forward name="admin" path="/AdminIndex.do" />
             <forward name="failure" path="/Failure.do" />
         </action>
         <action  path="/Logout" scope="session" type="com.arekar.attendance.struts.actions.LogoutAction">

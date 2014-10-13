@@ -110,6 +110,7 @@
                 <!--                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                                             </li>-->
                 <li class="divider"></li>
+
                 <li><a href="${pageContext.request.contextPath}/Logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
@@ -122,63 +123,71 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <!--                            <li class="sidebar-search">
-                                                <div class="input-group custom-search-form">
-                                                    <input type="text" class="form-control" placeholder="Search..."/>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
-                                                    </span>
-                                                </div>
-                                                 /input-group 
-                                            </li>-->
-
+                <li class="divider"></li>
+                <li class="divider"></li>
+                <li class="divider"></li>
+                <li class="divider"></li>
+                <li class="divider"></li>
                 <li>
                     <a href="${pageContext.request.contextPath}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/Attendance.do"><i class="fa fa-table fa-fw"></i> Asistencias</a>
                 </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/Calendar.do"><i class="fa fa-calendar fa-fw"></i> Horario</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Estadística<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="flot.html">General</a>
-                        </li>
-                        <li>
-                            <a href="morris.html">Por Usuario</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Control de Usuarios<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="flot.html">Añadir</a>
-                        </li>
-                        <li>
-                            <a href="morris.html">Modificar</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Control de Clases<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="flot.html">Añadir</a>
-                        </li>
-                        <li>
-                            <a href="morris.html">Modificar</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+                <c:if test="${not empty sessionScope.isProfessor}">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/Calendar.do"><i class="fa fa-calendar fa-fw"></i> Horario</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/PersonalStats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas</a>
+                    </li>
+                </c:if>
+                <c:if test="${not empty sessionScope.isAdmin}">
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/CalendarAdmin.do"><i class="fa fa-calendar fa-fw"></i> Horarios</a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/Stats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">General</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Por Usuario</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Control de Usuarios<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Añadir</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Modificar</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Control de Clases<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Añadir</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Modificar</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                </c:if>
                 <!--                            <li>
                                                 <a href="tables.html"><i class="fa fa-wrench fa-fw"></i> Control de Grupos</a>
                                             </li>-->

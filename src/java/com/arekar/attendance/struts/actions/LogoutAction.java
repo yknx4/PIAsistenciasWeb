@@ -26,6 +26,7 @@ public class LogoutAction extends org.apache.struts.action.Action  {
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         
             request.getSession().invalidate();
+            request.getSession(true).setAttribute("loginError", "Usuario o contraseña no validos.");
             return mapping.findForward(SUCCESS);
         
     }

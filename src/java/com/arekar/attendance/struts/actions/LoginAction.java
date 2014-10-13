@@ -31,6 +31,7 @@ public class LoginAction extends org.apache.struts.action.Action {
 
     private final static String SUCCESS = "success";
     private final static String FAILURE = "failure";
+    private final static String ADMIN = "admin";
     private HttpSession session;
 
     @Override
@@ -38,6 +39,7 @@ public class LoginAction extends org.apache.struts.action.Action {
         LoginForm loginForm = (LoginForm) form;
         String username = loginForm.getUserName();
         String password = loginForm.getPassword();
+        String forward = SUCCESS;
         /*String username = "ds";
          String password = "dsad";*/
 
@@ -52,9 +54,9 @@ public class LoginAction extends org.apache.struts.action.Action {
             session.setAttribute("UserNombre", mUser.getNombre());
             session.setAttribute("UserEmail", mUser.getEmail());
             session.setAttribute("UserPicture", request.getContextPath() + "/" + Utility.IMG_PATH + mUser.getPicture());
-            session.setAttribute("isAdmin", false);
+            /*session.setAttribute("isAdmin", false);
             session.setAttribute("isProfessor", false);
-            session.setAttribute("isPersonnel", false);
+            session.setAttribute("isPersonnel", false);*/
             
             
             
@@ -63,18 +65,22 @@ public class LoginAction extends org.apache.struts.action.Action {
                 switch (p) {
                     case ADMINISTRATIVE_PERSONNEL:
                         session.setAttribute("isPersonnel", true);
+                        break;
                     case PROFESSOR:
                         session.setAttribute("isProfessor", true);
+                        break;
                     case SYSTEM_ADMIN:
                         session.setAttribute("isAdmin", true);
+                        forward = ADMIN;
+                        break;
                     case EXTRA_FLAG:
-
+                        break;
                     default:
 
                 }
             }
 
-            return mapping.findForward(SUCCESS);
+            return mapping.findForward(forward);
         } else {
             if (session != null) {
                 session.invalidate();

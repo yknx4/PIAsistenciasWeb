@@ -3,6 +3,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:mainTemplate title="Inicio de Sesión">
     <jsp:body>
@@ -14,12 +16,12 @@
                             <h3 class="panel-title">Please Sign In</h3>
                         </div>
                         <div class="panel-body">
-                            
-                            <div class="alert alert-danger alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <html:errors />
-                            </div>
-
+                            <c:if test="${not empty sessionScope.loginError}">
+                                <div class="alert alert-danger alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">${sessionScope.loginError}</button>
+                                    <html:errors />
+                                </div>
+                            </c:if>
                             <form role="form" name="LoginForm" method="post" action="${pageContext.request.contextPath}/Login.do">
                                 <fieldset>
                                     <div class="form-group">

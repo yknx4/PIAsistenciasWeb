@@ -59,7 +59,7 @@
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <span class="text-left text-info">Clases Anteriores</span> &nbsp;&nbsp; <span class="text-right text-muted">07:00</span>
+                                <span class="text-left text-info">Clases Anteriores</span> &nbsp;&nbsp; <span class="text-right text-muted">${requestScope.h2}</span>
 
                             </div>
                             <!-- /.panel-heading -->
@@ -123,7 +123,7 @@
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <span class="text-left text-info">Clases Actuales</span> &nbsp;&nbsp; <span class="text-right text-muted">07:50</span>
+                                <span class="text-left text-info">Clases Actuales</span> &nbsp;&nbsp; <span class="text-right text-muted">${requestScope.h1}</span>
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
