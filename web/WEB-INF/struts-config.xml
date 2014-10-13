@@ -32,7 +32,9 @@
             <forward name="success" path="/adminIndexStruts.jsp" />
         </action>
         <action path="/Failure" forward="/failure.jsp"/>
-        <action path="/Attendance" forward="/attendanceStruts.jsp"/>
+        <action path="/Attendance" type="com.arekar.attendance.struts.actions.AttendanceAction">
+            <forward name="success" path="/attendanceStruts.jsp" />
+        </action>
         <action path="/Calendar" scope="session" type="com.arekar.attendance.struts.actions.PrintHorarioMaestroAction">
             <forward name="success" path="/calendarStruts.jsp" />
         </action>

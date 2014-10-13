@@ -29,7 +29,7 @@ public class PrintHorarioMaestroAction extends Action {
             throws Exception {
         
         int maestro = (int) request.getSession().getAttribute("UserId");
-        List<List<HorarioMaestro>> data = new HorarioMaestroDBData(maestro).getHorario();
+        List<List<HorarioMaestro>> data = new HorarioMaestroDBData(maestro).getData();
         List<List<HorarioMaestro>> toRemove = new ArrayList<>();
         List<HorarioMaestro> current;
         for(Object n: data){

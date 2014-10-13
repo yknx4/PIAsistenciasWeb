@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.ClasesWeb;
-import model.Horario;
 import model.SQLData.ClasesWebDBData;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -30,7 +29,7 @@ import view.ui.AsistenciasForm;
  *
  * @author Yknx
  */
-public class AdminDashboardAction extends Action {
+public class AttendanceAction extends Action {
     private int dia;
     private HorariosParse horas;
     private int[] horarios;
@@ -56,22 +55,21 @@ public class AdminDashboardAction extends Action {
            request.setAttribute("h2", h2);
            request.setAttribute("dia", dia);
            int maestro = (int) request.getSession().getAttribute("UserId");
+           boolean admin = request.getSession().getAttribute("isAdmin") != null;  
+
+           List<ClasesWeb> clases;
+           ClasesWebDBData mDbData;
+           if(admin) mDbData = new ClasesWebDBData();
+           else mDbData = new ClasesWebDBData(maestro);
+           mDbData.setAllDias(true);
+           mDbData.setAllHorarios(true);
+           mDbData.setLimit(true);
+           clases = mDbData.getData();
+           request.setAttribute("listClases", clases);
            
-           List<ClasesWeb> antes;
-           List<ClasesWeb> ahora;
            
-           ClasesWebDBData mDbData = new ClasesWebDBData();
-           mDbData.setDia(dia);
-           mDbData.setHorario(horarios[0]-1);
-           antes = mDbData.getData();
-           mDbData.setHorario(horarios[0]);
-           ahora = mDbData.getData();
-           request.setAttribute("listClasesAntes", antes);
-           request.setAttribute("listClasesAhora", ahora);
            
-           BaseStats mStats = new BaseStats(dia); 
-           request.setAttribute("faltas", mStats.getFaltas());
-           request.setAttribute("asistencias", mStats.getAsistencias());
+
            
            
         
