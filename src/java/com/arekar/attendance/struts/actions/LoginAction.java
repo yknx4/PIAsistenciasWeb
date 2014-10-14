@@ -72,6 +72,7 @@ public class LoginAction extends org.apache.struts.action.Action {
                     case SYSTEM_ADMIN:
                         session.setAttribute("isAdmin", true);
                         forward = ADMIN;
+                        Utility.forceAusent();
                         break;
                     case EXTRA_FLAG:
                         break;
