@@ -62,6 +62,7 @@ public class AttendanceAction extends Action {
            if(admin) mDbData = new ClasesWebDBData();
            else mDbData = new ClasesWebDBData(maestro);
            mDbData.setAllDias(true);
+           mDbData.setThisWeek(false);
            mDbData.setAllHorarios(true);
            mDbData.setLimit(true);
            clases = mDbData.getData();

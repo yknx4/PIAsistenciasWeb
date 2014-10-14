@@ -37,7 +37,7 @@
                                                     document.write(<bean:write name="horarioIndex"/> + 1);
                                                     </script>  </th>
                                                     <nested:iterate id="entry" name="row">
-                                                    <td><bean:write name="entry" property="salon"/> <br/> <small><bean:write name="entry" property="materia"/> </small><br/><small><bean:write name="entry" property="hora"/></small></td>
+                                                    <td><bean:write name="entry" property="salon"/> <br/> <small><bean:write name="entry" property="materia"/> - <bean:write name="entry" property="grupo"/> </small><br/><small><bean:write name="entry" property="hora"/></small></td>
 
                                                 </nested:iterate>
                                             </tr>

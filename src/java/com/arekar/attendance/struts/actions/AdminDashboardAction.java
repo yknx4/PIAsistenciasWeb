@@ -61,6 +61,7 @@ public class AdminDashboardAction extends Action {
            List<ClasesWeb> ahora;
            
            ClasesWebDBData mDbData = new ClasesWebDBData();
+           mDbData.setThisWeek(true);
            mDbData.setDia(dia);
            mDbData.setHorario(horarios[0]-1);
            antes = mDbData.getData();
