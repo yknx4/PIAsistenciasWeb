@@ -5,7 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:dashboardTemplate ptitle="Asistencias">
+<t:dashboardTemplate ptitle="Asistencias - ${requestScope.fechaBonita}">
     <jsp:body>
         <div class="row">
 

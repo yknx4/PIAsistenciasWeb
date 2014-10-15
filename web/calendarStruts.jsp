@@ -12,7 +12,9 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Asistencias
+                        Horario <c:if test="${not empty requestScope.nombreMaestro}">
+                            - ${requestScope.nombreMaestro}
+                        </c:if>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

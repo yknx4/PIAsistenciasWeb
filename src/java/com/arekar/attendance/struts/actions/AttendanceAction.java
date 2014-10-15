@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.arekar.attendance.struts.actions;
 
 import com.arekar.attendance.model.db.stats.BaseStats;
@@ -12,6 +11,7 @@ import helper.Utility;
 import static helper.Utility.isDebug;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,54 +30,126 @@ import view.ui.AsistenciasForm;
  * @author Yknx
  */
 public class AttendanceAction extends Action {
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
     private int dia;
     private HorariosParse horas;
     private int[] horarios;
+    String year;
+    String month;
+    String day;
+    private String user;
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         dia = Utility.getDate();
-           
-        try { 
+        user = request.getParameter("user");
+        int maestro;
+        try {
+            maestro = (int) request.getSession().getAttribute("UserId");
+        } catch (NullPointerException ex) {
+            System.out.println("Invalid Session");
+            return mapping.findForward("login");
+        }
+
+        try {
             horas = HorariosParse.getInstance();
             horarios = horas.getClosest();
-            if(isDebug) {
+            if (isDebug) {
                 horarios = Utility.fixedHorarios;
-                if(Utility.getDate()>4)
-                dia = Utility.fixedDay;
+                if (Utility.getDate() > 4) {
+                    dia = Utility.fixedDay;
+                }
             }
-        } catch ( SQLException | ParseException ex) {
+        } catch (SQLException | ParseException ex) {
             Logger.getLogger(AsistenciasForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-            String h1 = horas.getHora(horarios[0],true);
-            String h2 = horas.getHora(horarios[0]-1,true);
-           request.setAttribute("h1", h1);
-           request.setAttribute("h2", h2);
-           request.setAttribute("dia", dia);
-           int maestro = (int) request.getSession().getAttribute("UserId");
-           boolean admin = request.getSession().getAttribute("isAdmin") != null;  
+        String h1 = horas.getHora(horarios[0], true);
+        String h2 = horas.getHora(horarios[0] - 1, true);
+        request.setAttribute("h1", h1);
+        request.setAttribute("h2", h2);
+        request.setAttribute("dia", dia);
 
-           List<ClasesWeb> clases;
-           ClasesWebDBData mDbData;
-           if(admin) mDbData = new ClasesWebDBData();
-           else mDbData = new ClasesWebDBData(maestro);
-           mDbData.setAllDias(true);
-           mDbData.setThisWeek(false);
-           mDbData.setAllHorarios(true);
-           mDbData.setLimit(true);
-           clases = mDbData.getData();
-           request.setAttribute("listClases", clases);
-           
-           
-           
+        boolean admin = request.getSession().getAttribute("isAdmin") != null;
+        int dYear=-1, dMonth=-1, dDay=-1;
+        Date toCall = new Date();
+        year = request.getParameter("year");
+        month = request.getParameter("month");
+        day = request.getParameter("day");
+        if (year != null && !year.isEmpty()) {
 
-           
-           
-        
-        
+            dYear = Integer.parseInt(year);
+
+        }
+        if (month != null && !month.isEmpty()) {
+
+            dMonth = Integer.parseInt(month);
+
+        }
+        if (day != null && !day.isEmpty()) {
+
+            dDay = Integer.parseInt(day);
+
+        }
+        if(dYear>1970) toCall.setYear(dYear);
+        if(dMonth>=0) toCall.setMonth(dMonth);
+        if(dDay>0) toCall.setDate(dDay);
+
+        List<ClasesWeb> clases;
+        ClasesWebDBData mDbData;
+        if (admin) {
+            if(user!=null && !user.isEmpty()){
+                System.out.println(user);
+                if(user.equals("self")) mDbData = new ClasesWebDBData(maestro);
+                else mDbData = new ClasesWebDBData(Integer.parseInt(user));
+            }else
+            mDbData = new ClasesWebDBData();
+            
+        } 
+        else {
+            mDbData = new ClasesWebDBData(maestro);
+        }
+        mDbData.setDateSpecific(true);
+        mDbData.setDateQuery(toCall);
+        mDbData.setAllDias(true);
+        mDbData.setThisWeek(false);
+        mDbData.setAllHorarios(true);
+        mDbData.setLimit(true);
+        clases = mDbData.getData();
+        request.setAttribute("listClases", clases);
+        request.setAttribute("fechaBonita", Utility.PrettyDateFormatter.format(toCall));
+
         return mapping.findForward("success");
     }
-    
-    
-    
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
 }

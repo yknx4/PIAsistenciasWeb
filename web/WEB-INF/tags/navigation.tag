@@ -132,7 +132,7 @@
                     <a href="${pageContext.request.contextPath}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/Attendance.do"><i class="fa fa-table fa-fw"></i> Asistencias</a>
+                    <a href="${pageContext.request.contextPath}/Attendance.do<c:if test="${not empty sessionScope.isAdmin}">?user=self</c:if>"><i class="fa fa-table fa-fw"></i> Asistencias</a>
                 </li>
                 <c:if test="${not empty sessionScope.isProfessor}">
                     <li>
@@ -148,6 +148,9 @@
                     <li class="divider"></li>
                     <li class="divider"></li>
                     <li class="divider"></li>
+                    <li>
+                    <a href="${pageContext.request.contextPath}/Attendance.do"><i class="fa fa-table fa-fw"></i> Asistencias</a>
+                </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/CalendarAdmin.do"><i class="fa fa-calendar fa-fw"></i> Horarios</a>
                     </li>
