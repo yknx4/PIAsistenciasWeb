@@ -6,6 +6,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-nested" prefix="nested" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:dashboardTemplate ptitle="Horario">
+    
     <jsp:body>
         <div class="row">
 
