@@ -757,6 +757,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   border-width: 1px 0;
   margin-left: 0px;
   margin-right: 0px;
+  border-left: 1px;
 }
 .datepicker.dropdown-menu {
   position: absolute;

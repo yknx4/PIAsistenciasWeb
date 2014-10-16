@@ -136,7 +136,7 @@
                 </li>
                 <c:if test="${not empty sessionScope.isProfessor}">
                     <li>
-                        <a href="${pageContext.request.contextPath}/Calendar.do"><i class="fa fa-calendar fa-fw"></i> Horario</a>
+                        <a href="${pageContext.request.contextPath}/Calendar.do<c:if test="${not empty sessionScope.isAdmin}">?user=self</c:if>"><i class="fa fa-calendar fa-fw"></i> Horario</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/PersonalStats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas</a>
@@ -152,7 +152,7 @@
                     <a href="${pageContext.request.contextPath}/Attendance.do"><i class="fa fa-table fa-fw"></i> Asistencias</a>
                 </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/CalendarAdmin.do"><i class="fa fa-calendar fa-fw"></i> Horarios</a>
+                        <a href="${pageContext.request.contextPath}/Calendar.do"><i class="fa fa-calendar fa-fw"></i> Horarios</a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/Stats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas<span class="fa arrow"></span></a>

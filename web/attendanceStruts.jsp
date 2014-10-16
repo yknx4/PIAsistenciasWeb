@@ -19,7 +19,9 @@
                     <div class="well" id="titleContainer" >
                         
                         <div class="input-group date" >
-                                <input type="text" class="form-control" id="dateText" readonly><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control" id="dateText" readonly>
+                                <input type="date" class="form-control" readonly style="width: 1px; margin:  0px; padding: 0px; float: right">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
                         
                         

@@ -47,9 +47,20 @@ public class PrintHorarioMaestroAction extends Action {
                 if (!user.equals("self")) {
                     maestro = Integer.parseInt(user);
                     User mUser = UserController.getUser(maestro);
-                    request.setAttribute("nombreMaestro", mUser.getNombre());
+                    request.setAttribute("nombreMaestro", mUser.getName());
+                }else{
+                    request.setAttribute("isSelf", true);
                 }
             }
+            List<User> mUsers = UserController.getUsers();
+            List<User> profUsers = new ArrayList<>(); 
+            for(User u:mUsers){
+                if (u.hasPermission(User.PROFESSOR)) profUsers.add(u);
+            }
+            request.setAttribute("listUsers", profUsers);
+                    
+            
+            
         }
 
         List<List<HorarioMaestro>> data = new HorarioMaestroDBData(maestro).getData();

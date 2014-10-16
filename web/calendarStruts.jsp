@@ -4,12 +4,48 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-nested" prefix="nested" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:dashboardTemplate ptitle="Horario">
-    
-    <jsp:body>
-        <div class="row">
 
+    <jsp:body>
+        <c:if test="${not empty sessionScope.isAdmin}">
+            <c:if test="${empty requestScope.isSelf}">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="well" id="titleContainer" >
+                            <div class="text-center">
+                                <div class="dropdown">
+                                    <button class="btn btn-lg btn-outline btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                        Maestro
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        
+
+                                                <logic:iterate id="rowProfesor" name="listUsers" indexId="maestrosIndex">
+<!--                                                    <script>
+                                                        var ind = <bean:write name="maestrosIndex"/>;
+                                                        if (ind % 20 === 0)
+                                                            document.write('<ul class="list-unstyled col-md-4">');
+                                                    </script>-->
+                                                    <li role="presentation"><a role="menuitem" tabindex="<bean:write name="maestrosIndex"/>" href="${pageContext.request.contextPath}/Calendar.do?user=<bean:write name="rowProfesor" property="id"/>"><bean:write name="rowProfesor" property="name"/></a></li>
+<!--                                                    <script>
+
+                                                        if (ind % 20 === 0)
+                                                            document.write('</ul>');
+                                                    </script>-->
+                                                </logic:iterate>
+                                           
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+        </c:if>
+        <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">

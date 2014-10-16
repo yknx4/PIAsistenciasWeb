@@ -51,7 +51,7 @@ public class LoginAction extends org.apache.struts.action.Action {
             session.setAttribute("rawUserData", data);
             session.setAttribute("UserObject", mUser);
             session.setAttribute("UserId", mUser.getId());
-            session.setAttribute("UserNombre", mUser.getNombre());
+            session.setAttribute("UserNombre", mUser.getName());
             session.setAttribute("UserEmail", mUser.getEmail());
             session.setAttribute("UserPicture", request.getContextPath() + "/" + Utility.IMG_PATH + mUser.getPicture());
             /*session.setAttribute("isAdmin", false);
