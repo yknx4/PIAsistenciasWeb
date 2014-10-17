@@ -238,6 +238,9 @@ public class GetDataAction extends Action {
 
                     break;
                 }
+                case "usuario":{
+                    String metodo = (String) request.getParameter("metodo");
+                }
                 
             }
             GsonBuilder builder = new GsonBuilder();
