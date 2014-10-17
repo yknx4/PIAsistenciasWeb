@@ -167,29 +167,18 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Control de Usuarios<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Control<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">Añadir</a>
+                                <a href="${pageContext.request.contextPath}/ManageNew.do">Añadir</a>
                             </li>
                             <li>
-                                <a href="morris.html">Modificar</a>
+                                <a href="${pageContext.request.contextPath}/ManageExisting.do">Modificar</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Control de Clases<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="flot.html">Añadir</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Modificar</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+                    
                 </c:if>
                 <!--                            <li>
                                                 <a href="tables.html"><i class="fa fa-wrench fa-fw"></i> Control de Grupos</a>

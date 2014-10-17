@@ -6,6 +6,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:dashboardTemplate ptitle="Inicio">
     <jsp:body>
+        <t:validateAdmin></t:validateAdmin>
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="panel panel-primary">

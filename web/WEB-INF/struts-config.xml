@@ -23,11 +23,16 @@
         <forward name="login"  path="/Login.do"/>
         <forward name="logout"  path="/Logout.do"/>
         <forward name="failure"  path="/Failure.do"/>
+        <forward name="managenew"  path="/ManageNe.do"/>
+        <forward name="manageexisting"  path="/ManageExisting.do"/>
+        <forward name="getData"  path="/getData.do"/>
     </global-forwards>
 
     <action-mappings>
         
         <action path="/Index" forward="/indexStruts.jsp"/>
+        <action path="/ManageNew" forward="/manageNewStruts.jsp"/>
+        <action path="/ManageExisting" forward="/manageExistingStruts.jsp"/>
         <action path="/AdminIndex" scope="request" type="com.arekar.attendance.struts.actions.AdminDashboardAction">
             <forward name="success" path="/adminIndexStruts.jsp" />
         </action>
@@ -45,6 +50,9 @@
         </action>
         <action  path="/Logout" scope="session" type="com.arekar.attendance.struts.actions.LogoutAction">
             <forward name="success" path="/Login.do" />
+        </action>
+        <action  path="/getData" scope="request" type="com.arekar.attendance.struts.actions.GetDataAction">
+            <forward name="success" path="/admin/getDataStruts.jsp" />
         </action>
     </action-mappings>
     
