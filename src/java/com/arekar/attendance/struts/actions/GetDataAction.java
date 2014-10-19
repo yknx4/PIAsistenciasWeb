@@ -240,6 +240,21 @@ public class GetDataAction extends Action {
                 }
                 case "usuario":{
                     String metodo = (String) request.getParameter("metodo");
+                    switch(metodo){
+                        case "validate":
+                        {
+                            String email = (String) request.getParameter("email");
+                            if(email!=null && !email.isEmpty() && UserController.validateEmail(email)){
+                                resultado.setOutput(null);
+                                resultado.setError(false);
+                                resultado.setMessage("El usuario no esta utilizado");
+                            }else{
+                                resultado.setError(true);
+                                resultado.setMessage("El usuario ya esta utilizado");
+                            }
+                            break;
+                        }
+                    }
                 }
                 
             }

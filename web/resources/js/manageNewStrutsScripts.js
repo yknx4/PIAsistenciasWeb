@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 
+function IsEmail(email) {
+  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
+}
+
 var dia;
 var horario;
 var maestro;
@@ -271,14 +276,6 @@ $('select[name=salones]').change(function() {
                         var html = '<div class="alert alert-danger alert-dismissable" hidden="true"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' + e.message + '</div>';
                         $('#clasePanel').prepend(html);
                     }
-                    /*
-                     var dia;
-                     var horario;
-                     var maestro;
-                     var grupo;
-                     var materia;
-                     var salon;*/
-
 
                 },
                 error: function(e) {
@@ -350,5 +347,17 @@ $('button[name=btnsignup]').click(function() {
 
             });
     
+
+});
+
+$('input [name=email]').change(function() {
+    var email = $(this).val();
+    
+    
+    if (isEmail(email)) {
+        
+    } else {
+        
+    }
 
 });
