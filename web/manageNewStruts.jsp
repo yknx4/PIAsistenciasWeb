@@ -8,10 +8,10 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:dashboardTemplate ptitle="Control">
     <jsp:attribute name="pcustomcss">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+        
     </jsp:attribute>
     <jsp:attribute name="pcustomjs">
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+        
         <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/manageNewStrutsScripts.js" type="text/javascript" ></script> 
     </jsp:attribute>
     <jsp:body>
@@ -22,7 +22,7 @@
                         <div class="panel-heading">
                             <div class="panel-title">Añadir Usuario</div>
                         </div>  
-                        <div class="panel-body" >
+                        <div class="panel-body">
                             <form id="signupform" class="form-horizontal" role="form">
 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
@@ -66,17 +66,17 @@
 
                                         <div class="checkbox ">
                                             <label  class="tooltipCheckbox" data-toggle="tooltip" title="Por horas, Tiempo Completo.">
-                                                <input  type="checkbox"/> Maestro
+                                                <input  type="checkbox" name="isMaestro"/> Maestro
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label class="tooltipCheckbox"  data-toggle="tooltip" title="Administrativo, Directivo, Profesor Tiempo completo.">
-                                                <input type="checkbox"/> Personal
+                                                <input type="checkbox" name="isPersonal" /> Personal
                                             </label>
                                         </div>
                                         <div class="checkbox ">
                                             <label class="text-danger tooltipCheckbox"  data-toggle="tooltip" title="Control total del Sistema.">
-                                                <input type="checkbox"/> Administrador
+                                                <input type="checkbox" name="isAdmin" /> Administrador
                                             </label>
                                         </div>
                                     </div>
