@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Clase;
 import model.Horario;
+import model.User;
 import model.database.DataContract;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -85,6 +86,7 @@ public class GetDataAction extends Action {
             JsonOutput resultado = new JsonOutput();
             type = type.toLowerCase();
             request.setAttribute("isValid", true);
+            System.out.println(type);
             switch (type) {
                 case "horarios": {
                     HorariosParse horarios = HorariosParse.getInstance();
@@ -209,7 +211,8 @@ public class GetDataAction extends Action {
                     }
 
                     break;
-                }case "insert": {
+                }
+                case "insert": {
                     //where id not in (SELECT id_maestro FROM jfperez.clases where (dia =0 and id_Horarios = 1))
                     try {
                         String maestro = getNumericParameter("maestro", request);
@@ -240,10 +243,40 @@ public class GetDataAction extends Action {
                 }
                 case "usuario":{
                     String metodo = (String) request.getParameter("metodo");
+                    String email = (String) request.getParameter("email");
+                    System.out.println(metodo);
                     switch(metodo){
-                        case "validate":
+                        case "registrar":
                         {
-                            String email = (String) request.getParameter("email");
+                            String nombre = (String) request.getParameter("nombre");
+                            String apellidos = (String) request.getParameter("apellidos");
+                            String password = (String) request.getParameter("password");
+                            String permisos = (String) request.getParameter("permisos");
+                            User toI = new User();
+                            toI.setName(apellidos+" "+nombre);
+                            toI.setPasshash(password, true);
+                            toI.setEmail(email);
+                            toI.setPermission(Integer.parseInt(permisos));
+                            boolean isValid = UserController.insertUser(toI);
+                        if (isValid) {
+                            resultado.setOutput(null);
+                            resultado.setError(false);
+                            resultado.setMessage("Este usuario fue agregado con éxito. :"+toI.getName());
+                        }
+                        else{
+                            resultado.setOutput(null);
+                            resultado.setError(true);
+                            resultado.setMessage("Error en los datos del usuario, por favor llene de nuevo el formulario.");
+                        }
+                            
+                            
+                            
+                            break;
+                        }
+                        
+                        case "validar":
+                        {
+                            
                             if(email!=null && !email.isEmpty() && UserController.validateEmail(email)){
                                 resultado.setOutput(null);
                                 resultado.setError(false);

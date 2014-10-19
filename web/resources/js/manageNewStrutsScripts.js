@@ -5,8 +5,8 @@
  */
 
 function IsEmail(email) {
-  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  return regex.test(email);
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
 }
 
 var dia;
@@ -279,18 +279,18 @@ $('select[name=salones]').change(function() {
 
                 },
                 error: function(e) {
-                    var message =JSON.stringify(e);
+                    var message = JSON.stringify(e);
                     console.log("error:" + message);
-                    
+
                     var html = '<div class="alert alert-danger alert-dismissable" hidden="true"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' + message + '</div>';
-                        $('#clasePanel').prepend(html);
+                    $('#clasePanel').prepend(html);
                 }
 
             });
         else {
             var message = "Holo";
             var html = '<div class="alert alert-warning alert-dismissable" hidden="true"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' + message + '</div>';
-                        $('#clasePanel').prepend(html);
+            $('#clasePanel').prepend(html);
             //TODO: handle validation error
         }
     }
@@ -305,7 +305,7 @@ $('select').change(function() {
 
 });
 
-function clearForm(){
+function clearForm() {
     $('select').val(-1);
     $('select').change();
     $('button[name=btnsignup]').prop('disabled', true);
@@ -313,51 +313,87 @@ function clearForm(){
 
 
 $('button[name=btnsignup]').click(function() {
-    
+
     $.ajax({
-                type: 'POST',
-                url: './getData.do',
-                data: {type: "insert", dia: dia, horario: horario, maestro: maestro, grupo: grupo, materia: materia, salon: salon},
-                success: function(result) {
-                    var data = {type: "insert", dia: dia, horario: horario, maestro: maestro, grupo: grupo, materia: materia, salon: salon};
-                    console.log(data);
-                    console.log(result);
-                    if (!result.error) {
-                          alert( "Clase registrada con éxito." );
-                          clearForm();
-                    }
-                    else {
-                        var message = "Error al registrar clase";
-                        var html = '<div class="alert alert-danger alert-dismissable" hidden="true"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' + message + '</div>';
-                        $('#clasePanel').prepend(html);
-                        clearForm();
-                    }
-                    
+        type: 'POST',
+        url: './getData.do',
+        data: {type: "insert", dia: dia, horario: horario, maestro: maestro, grupo: grupo, materia: materia, salon: salon},
+        success: function(result) {
+            var data = {type: "insert", dia: dia, horario: horario, maestro: maestro, grupo: grupo, materia: materia, salon: salon};
+            console.log(data);
+            console.log(result);
+            if (!result.error) {
+                alert("Clase registrada con éxito.");
+                clearForm();
+            }
+            else {
+                var message = "Error al registrar clase";
+                var html = '<div class="alert alert-danger alert-dismissable" hidden="true"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' + message + '</div>';
+                $('#clasePanel').prepend(html);
+                clearForm();
+            }
 
 
-                },
-                error: function(e) {
-                    var message =JSON.stringify(e);
-                    console.log("error:" + message);
-                    
-                    var html = '<div class="alert alert-danger alert-dismissable" hidden="true"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' + message + '</div>';
-                        $('#clasePanel').prepend(html);
-                        clearForm();
-                }
 
-            });
-    
+        },
+        error: function(e) {
+            var message = JSON.stringify(e);
+            console.log("error:" + message);
+
+            var html = '<div class="alert alert-danger alert-dismissable" hidden="true"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' + message + '</div>';
+            $('#clasePanel').prepend(html);
+            clearForm();
+        }
+
+    });
+
 
 });
 
-$('input [name=email]').change(function() {
+$('#inpte').keyup(function() {
+    console.log("Email changed.");
+    $('.pruebaClass').addClass("input-group");
+    $('.pruebaClass span').addClass("input-group-addon");
+    $('.pruebaClass span i').addClass("fa fa-circle-o-notch fa-spin");
+    $('pruebaClass span').show();
+
+
     var email = $(this).val();
-    
-    
-    if (isEmail(email)) {
+
+
+    if (IsEmail(email)) {
         
-    } else {
-        
+        $.ajax({
+            type: 'POST',
+            url: './getData.do',
+            data: {type: "usuario", metodo: "validar", email:email},
+            success: function(result) {
+                console.log(result);
+                
+                if (result.error) {
+                    $('.pruebaClass span i').removeClass();
+                    $('.pruebaClass span i').addClass("fa fa-times");
+                } else {
+                    $('.pruebaClass span i').removeClass();
+                    $('.pruebaClass span i').addClass("fa fa-check");
+                }
+
+            },
+            error: function(e) {
+                console.log("error:" + JSON.stringify(e));
+                $(this).prop('disabled', false);
+                 $('.pruebaClass span i').removeClass();
+                    $('.pruebaClass span i').addClass("fa fa-times");
+            }
+
+        });
+
+    } 
+    if (email.length == 0) {
+        $('.pruebaClass').removeClass("input-group");
+        $('.pruebaClass span').removeClass("input-group-addon");
+        $('.pruebaClass span i').removeClass();
+        $('pruebaClass span').hide();
     }
 
 });

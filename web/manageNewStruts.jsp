@@ -32,7 +32,10 @@
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address"/>
+                                        <div id="containerEmail" class="pruebaClass">
+                                            <input id="inpte" type="text" class="form-control" name="email" placeholder="Email Address"/>
+                                            <span><i></i></span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -102,7 +105,7 @@
                             <div class="panel-title">Añadir Clase</div>
                         </div>  
                         <div class="panel-body" id="clasePanel">
-                            
+
                             <form id="classform" class="form-horizontal" role="form">
 
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
@@ -130,7 +133,7 @@
                                             <div class="col-md-9">
                                                 <select class="form-control" disabled="true" required="true" name="maestros">
                                                     <option value="-1"></option> 
-                                                    
+
                                                 </select>
                                             </div>
                                         </div>
@@ -151,7 +154,7 @@
                                             <div class="col-md-9">
                                                 <select class="form-control" disabled="true" required="true" name="horarios">
                                                     <option value="-1"></option>
-                                                    
+
 
                                                 </select>
                                             </div>
@@ -170,7 +173,7 @@
                                             <div class="col-md-9">
                                                 <select class="form-control" disabled="true" required="true" name="salones">
                                                     <option value="-1"></option> 
-                                                    
+
 
                                                 </select>
                                             </div>
