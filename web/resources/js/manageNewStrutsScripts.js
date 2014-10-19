@@ -373,9 +373,11 @@ $('#inpte').keyup(function() {
                 if (result.error) {
                     $('.pruebaClass span i').removeClass();
                     $('.pruebaClass span i').addClass("fa fa-times");
+                    $('button[name=btnadduser]').prop('disabled', true);
                 } else {
                     $('.pruebaClass span i').removeClass();
                     $('.pruebaClass span i').addClass("fa fa-check");
+                    $('button[name=btnadduser]').prop('disabled', false);
                 }
 
             },
@@ -393,6 +395,8 @@ $('#inpte').keyup(function() {
         $('.pruebaClass').removeClass("input-group");
         $('.pruebaClass span').removeClass("input-group-addon");
         $('.pruebaClass span i').removeClass();
+        //btnadduser
+        $('button[name=btnadduser]').prop('disabled', true);
         $('pruebaClass span').hide();
     }
 

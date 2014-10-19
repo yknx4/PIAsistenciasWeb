@@ -7,8 +7,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:dashboardTemplate ptitle="Control">
+    <jsp:attribute name="pcustomcss">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+    </jsp:attribute>
     <jsp:attribute name="pcustomjs">
-
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
         <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/manageNewStrutsScripts.js" type="text/javascript" ></script> 
     </jsp:attribute>
     <jsp:body>
@@ -82,7 +85,7 @@
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="fa fa-user"></i> &nbsp Registrar Usuario</button>
+                                        <button id="btn-signup" type="button" class="btn btn-info" name="btnadduser" disabled="true"><i class="fa fa-user"></i> &nbsp Registrar Usuario</button>
 
                                     </div>
                                 </div>
