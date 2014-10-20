@@ -8,6 +8,7 @@ package com.arekar.attendance.struts.actions;
 import com.arekar.attendance.struts.json.serializers.HorarioSerializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import controller.AsistenciaController;
 import controller.SQLData.ClasesController;
 import controller.SQLData.GrupoController;
 import controller.SQLData.MateriaController;
@@ -198,8 +199,7 @@ public class GetDataAction extends Action {
                             resultado.setOutput(null);
                             resultado.setError(false);
                             resultado.setMessage("Esta clase es correcta y puede ser agregada.");
-                        }
-                        else{
+                        } else {
                             resultado.setOutput(null);
                             resultado.setError(true);
                             resultado.setMessage("Error en los datos de la clase, por favor llene de nuevo el formulario.");
@@ -227,8 +227,7 @@ public class GetDataAction extends Action {
                             resultado.setOutput(null);
                             resultado.setError(false);
                             resultado.setMessage("Esta clase fue agregada con éxito.");
-                        }
-                        else{
+                        } else {
                             resultado.setOutput(null);
                             resultado.setError(true);
                             resultado.setMessage("Error en los datos de la clase, por favor llene de nuevo el formulario.");
@@ -241,47 +240,109 @@ public class GetDataAction extends Action {
 
                     break;
                 }
-                case "usuario":{
+                case "asistencia":{
                     String metodo = (String) request.getParameter("metodo");
-                    String email = (String) request.getParameter("email");
-                    System.out.println(metodo);
                     switch(metodo){
-                        case "registrar":
-                        {
+                        case "justificar":{
+                            String id = (String) request.getParameter("id");
+                            String fecha = (String) request.getParameter("fecha");
+                            id = Utility.justNumbers(id);
+                            int fid = Integer.parseInt(id);
+                            System.out.println("A justificar: "+fid);
+                            if (!AsistenciaController.justificarAsistencia(fid,fecha)) {
+                                resultado.setOutput(fid);
+                                resultado.setError(true);
+                                resultado.setMessage("No se puedo justificar. Intente mas tarde");
+                            } else {
+                                resultado.setOutput(fid);
+                                resultado.setError(false);
+                                resultado.setMessage("Falta Justificada.");
+                            }
+                            break;
+                        }
+                    }
+                    
+                    break;
+                }
+                    
+                
+                case "usuario": {
+                    String metodo = (String) request.getParameter("metodo");
+
+                    System.out.println(metodo);
+                    switch (metodo) {
+                        case "obtener": {
+                            String id = (String) request.getParameter("id");
+                            User mUser = null;
+                            if(id!=null && !id.isEmpty()) mUser = UserController.getUser(Integer.parseInt(id));
+                            if (mUser==null) {
+                                resultado.setOutput(id);
+                                resultado.setError(true);
+                                resultado.setMessage("Este usuario no existe. ");
+                            } else {
+                                resultado.setOutput(mUser);
+                                resultado.setError(false);
+                                resultado.setMessage("Usuario obtenido con exito.");
+                            }
+                            break;
+                        }
+                        case "actualizar": {
+                            String id = (String) request.getParameter("id");
+                            String email = (String) request.getParameter("email");
+                            String nombre = (String) request.getParameter("nombre");
+                            String permisos = (String) request.getParameter("permisos");
+                            String activo = (String) request.getParameter("activo");
+                            User toI = new User();
+                            toI.setId(Integer.parseInt(id));
+                            toI.setName(nombre);
+                            toI.setEmail(email);
+                            toI.setPermission(Integer.parseInt(permisos));
+                            toI.setActivo(activo.equals("1"));
+                            boolean isValid = UserController.updateUser(toI);
+                            if (isValid) {
+                                resultado.setOutput(null);
+                                resultado.setError(false);
+                                resultado.setMessage("Este usuario fue actualizado con éxito. :" + toI.getName());
+                            } else {
+                                resultado.setOutput(null);
+                                resultado.setError(true);
+                                resultado.setMessage("Error en los datos del usuario, por favor llene de nuevo el formulario.");
+                            }
+
+                            break;
+                        }
+                        case "registrar": {
+                            String email = (String) request.getParameter("email");
                             String nombre = (String) request.getParameter("nombre");
                             String apellidos = (String) request.getParameter("apellidos");
                             String password = (String) request.getParameter("password");
                             String permisos = (String) request.getParameter("permisos");
                             User toI = new User();
-                            toI.setName(apellidos+" "+nombre);
+                            toI.setName(apellidos + " " + nombre);
                             toI.setPasshash(password, true);
                             toI.setEmail(email);
                             toI.setPermission(Integer.parseInt(permisos));
                             boolean isValid = UserController.insertUser(toI);
-                        if (isValid) {
-                            resultado.setOutput(null);
-                            resultado.setError(false);
-                            resultado.setMessage("Este usuario fue agregado con éxito. :"+toI.getName());
-                        }
-                        else{
-                            resultado.setOutput(null);
-                            resultado.setError(true);
-                            resultado.setMessage("Error en los datos del usuario, por favor llene de nuevo el formulario.");
-                        }
-                            
-                            
-                            
+                            if (isValid) {
+                                resultado.setOutput(null);
+                                resultado.setError(false);
+                                resultado.setMessage("Este usuario fue agregado con éxito. :" + toI.getName());
+                            } else {
+                                resultado.setOutput(null);
+                                resultado.setError(true);
+                                resultado.setMessage("Error en los datos del usuario, por favor llene de nuevo el formulario.");
+                            }
+
                             break;
                         }
-                        
-                        case "validar":
-                        {
-                            
-                            if(email!=null && !email.isEmpty() && UserController.validateEmail(email)){
+
+                        case "validar": {
+                            String email = (String) request.getParameter("email");
+                            if (email != null && !email.isEmpty() && UserController.validateEmail(email)) {
                                 resultado.setOutput(null);
                                 resultado.setError(false);
                                 resultado.setMessage("El usuario no esta utilizado");
-                            }else{
+                            } else {
                                 resultado.setError(true);
                                 resultado.setMessage("El usuario ya esta utilizado");
                             }
@@ -289,7 +350,7 @@ public class GetDataAction extends Action {
                         }
                     }
                 }
-                
+
             }
             GsonBuilder builder = new GsonBuilder();
             builder.serializeNulls();

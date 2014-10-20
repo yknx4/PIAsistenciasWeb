@@ -32,7 +32,9 @@
         
         <action path="/Index" forward="/indexStruts.jsp"/>
         <action path="/ManageNew" forward="/manageNewStruts.jsp"/>
-        <action path="/ManageExisting" forward="/manageExistingStruts.jsp"/>
+        <action path="/ManageExisting" scope="request" type="com.arekar.attendance.struts.actions.ManageExistingAction">
+            <forward name="success" path="/manageModifyStruts.jsp" />
+        </action>
         <action path="/AdminIndex" scope="request" type="com.arekar.attendance.struts.actions.AdminDashboardAction">
             <forward name="success" path="/adminIndexStruts.jsp" />
         </action>

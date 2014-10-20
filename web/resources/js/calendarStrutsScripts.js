@@ -4,6 +4,50 @@
  * and open the template in the editor.
  */
 
+$('button').tooltip();
+$('button').click(function(e) {
+    if (confirm('Esta seguro que desea justificar esta falta?')) {
+        // Save it!
+        var id = $(this).data('claseid');
+        var fecha = $(this).data('fecha');
+        console.log(id+" , "+fecha);
+        //alert(id);
+        $.ajax({
+            type: 'POST',
+            url: './getData.do',
+            data: {type: "asistencia", id: id, metodo: "justificar",fecha:fecha},
+            success: function(result) {
+                var data = {type: "asistencia", id: id, metodo: "justificar",fecha:fecha};
+                console.log(data);
+                console.log(result);
+                if (!result.error) {
+                    alert(result.message);
+                    location.reload(true);
+                }
+                else {
+                    alert(result.message);
+                    location.reload();
+                }
+
+
+
+            },
+            error: function(e) {
+                var message = JSON.stringify(e);
+                console.log("error:" + message);
+                //location.reload();
+            }
+
+        });
+
+    } else {
+        // Do nothing!
+
+    }
+
+});
+
+
 function getUrlParameter(sParam)
 {
     var sPageURL = window.location.search.substring(1);

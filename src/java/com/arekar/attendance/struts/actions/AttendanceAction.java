@@ -142,6 +142,7 @@ public class AttendanceAction extends Action {
         clases = mDbData.getData();
         request.setAttribute("listClases", clases);
         request.setAttribute("fechaBonita", Utility.PrettyDateFormatter.format(toCall));
+        request.setAttribute("fechaSQL", Utility.MySQLDateFormatter.format(toCall));
 
         return mapping.findForward("success");
     }

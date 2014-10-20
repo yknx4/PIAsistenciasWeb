@@ -9,27 +9,29 @@
     <jsp:attribute name="pcustomjs">
         <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js" type="text/javascript" ></script> 
         <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/calendarStrutsScripts.js" type="text/javascript" ></script> 
+        
     </jsp:attribute>
     <jsp:attribute name="pcustomcss">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datepicker3.css"/>
     </jsp:attribute>
     <jsp:body>
+        
         <div class="row">
             <div class="col-lg-1">
-                    <div class="well" id="titleContainer" >
-                        
-                        <div class="input-group date" >
-                                <input type="text" class="form-control" id="dateText" readonly>
-                                <input type="date" class="form-control" readonly style="width: 1px; margin:  0px; padding: 0px; float: right">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            </div>
-                        
-                        
+                <div class="well" id="titleContainer" >
+
+                    <div class="input-group date" >
+                        <input type="text" class="form-control" id="dateText" readonly>
+                        <input type="date" class="form-control" readonly style="width: 1px; margin:  0px; padding: 0px; float: right">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
+
+
                 </div>
-            
-                
-           
+            </div>
+
+
+
         </div>
         <div class="row">
 
@@ -37,8 +39,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" >
                         Asistencias 
-                            
-                        
+
+
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -58,7 +60,7 @@
                                 </thead>
                                 <tbody>
                                     <logic:iterate id="rowAntes" name="listClases" indexId="claseIndexAhora">
-                                        <logic:equal name="rowAntes" property="asistio" value="true">
+                                        <logic:equal name="rowAntes" property="asistioju" value="true">
                                             <tr >
                                                 <td><bean:write name="rowAntes" property="fechaAsistio"/></td>
                                                 <td><bean:write name="rowAntes" property="hora"/></td>
@@ -73,6 +75,7 @@
                                                         <logic:equal name="rowAntes" property="late" value="true">&#9785; </logic:equal>
                                                     </logic:equal>
                                                     <logic:equal name="rowAntes" property="asistio" value="false">✘ </logic:equal>
+                                                    <logic:equal name="rowAntes" property="justifico" value="true">&#128515; </logic:equal>
 
                                                     </td>
                                                 </tr>
@@ -111,7 +114,7 @@
                                 </thead>
                                 <tbody>
                                     <logic:iterate id="rowAntes" name="listClases" indexId="claseIndexAhora">
-                                        <logic:equal name="rowAntes" property="asistio" value="false">
+                                        <logic:equal name="rowAntes" property="asistioju" value="false">
                                             <tr >
                                                 <td><bean:write name="rowAntes" property="fechaAsistio"/></td>
                                                 <td><bean:write name="rowAntes" property="hora"/></td>
@@ -125,10 +128,17 @@
                                                     <logic:equal name="rowAntes" property="asistio" value="true">&#10004; 
                                                         <logic:equal name="rowAntes" property="late" value="true">&#9785; </logic:equal>
                                                     </logic:equal>
-                                                    <logic:equal name="rowAntes" property="asistio" value="false">✘ </logic:equal>
+                                                    <c:if test="${empty sessionScope.isAdmin}">
+                                                        <logic:equal name="rowAntes" property="asistio" value="false">✘ </logic:equal>
+                                                    </c:if>
+                                                    <c:if test="${not empty sessionScope.isAdmin}">
+                                                        <logic:equal name="rowAntes" property="asistio" value="false"><button type="button" class="btn btn-outline btn-default linkJustificar" title="Justificar Falta" data-placement="left" data-toggle="tooltip" data-original-title="Justificar Falta" data-claseid="f<bean:write name="rowAntes" property="id"/>"  data-fecha="<bean:write name="rowAntes" property="fechafinal"/>" >✘</button></logic:equal>
+<!--                                                        <a class="linkJustificar" title="Justificar Falta" data-placement="left" data-toggle="tooltip" data-original-title="Justificar Falta"><logic:equal name="rowAntes" property="asistio" value="false">✘ </logic:equal></a>-->
+                                                    </c:if>
 
-                                                    </td>
-                                                </tr>
+
+                                                </td>
+                                            </tr>
                                         </logic:equal>
                                     </logic:iterate>
 

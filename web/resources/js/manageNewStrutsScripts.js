@@ -311,8 +311,21 @@ function clearForm() {
     $('button[name=btnsignup]').prop('disabled', true);
 }
 
-function clearUserForm(){
+function clearUserForm() {
     $('button[name=btnadduser]').prop('disabled', true);
+    $('#inpte').val("");
+    $('input[name=firstname]').val("");
+    $('input[name=lastname]').val("");
+    $('input[name=passwd]').val("");
+    $('input[name=isMaestro]').prop('checked', false);   ////2
+    $('input[name=isPersonal]').prop('checked', false);
+    $('input[name=isAdmin]').prop('checked', false);
+    $('.pruebaClass').removeClass("input-group");
+    $('.pruebaClass span').removeClass("input-group-addon");
+    $('.pruebaClass span i').removeClass();
+    //btnadduser
+    $('pruebaClass span').hide();
+
 }
 
 
@@ -366,14 +379,14 @@ $('#inpte').keyup(function() {
 
 
     if (IsEmail(email)) {
-        
+
         $.ajax({
             type: 'POST',
             url: './getData.do',
-            data: {type: "usuario", metodo: "validar", email:email},
+            data: {type: "usuario", metodo: "validar", email: email},
             success: function(result) {
                 console.log(result);
-                
+
                 if (result.error) {
                     $('.pruebaClass span i').removeClass();
                     $('.pruebaClass span i').addClass("fa fa-times");
@@ -388,13 +401,13 @@ $('#inpte').keyup(function() {
             error: function(e) {
                 console.log("error:" + JSON.stringify(e));
                 $(this).prop('disabled', false);
-                 $('.pruebaClass span i').removeClass();
-                    $('.pruebaClass span i').addClass("fa fa-times");
+                $('.pruebaClass span i').removeClass();
+                $('.pruebaClass span i').addClass("fa fa-times");
             }
 
         });
 
-    } 
+    }
     if (email.length == 0) {
         $('.pruebaClass').removeClass("input-group");
         $('.pruebaClass span').removeClass("input-group-addon");
@@ -406,14 +419,17 @@ $('#inpte').keyup(function() {
 
 });
 
-function getPermissions(){
+function getPermissions() {
     var perm = 0;
     var prof = $('input[name=isMaestro]').is(':checked');   ////2
     var pers = $('input[name=isPersonal]').is(':checked');   ///1
     var admn = $('input[name=isAdmin]').is(':checked');  /////4
-    if(prof) perm = perm | 2;
-    if(pers) perm = perm | 1;
-    if(admn) perm = perm | 4;
+    if (prof)
+        perm = perm | 2;
+    if (pers)
+        perm = perm | 1;
+    if (admn)
+        perm = perm | 4;
     return perm;
 }
 
@@ -421,33 +437,34 @@ $('button[name=btnadduser]').click(function() {
     console.log("Intento registro");
     var email = $('#inpte').val();
     var nombre = $('input[name=firstname]').val();
-    var apellidos= $('input[name=lastname]').val();
+    var apellidos = $('input[name=lastname]').val();
     var permisos = getPermissions();
-    var password = $('input[name=passwd]').val();;
-    
-    if(nombre== null || nombre == "" || nombre.length <4){
+    var password = $('input[name=passwd]').val();
+    ;
+
+    if (nombre == null || nombre == "" || nombre.length < 4) {
         $('input[name=firstname]').focus();
         return;
     }
-    if(apellidos== null || apellidos == "" || apellidos.length <4){
+    if (apellidos == null || apellidos == "" || apellidos.length < 4) {
         $('input[name=lastname]').focus();
         return;
     }
-    if(password== null || password == "" || password.length <6){
+    if (password == null || password == "" || password.length < 6) {
         $('input[name=passwd]').focus();
         return;
     }
-    if(permisos==0){
+    if (permisos == 0) {
         return;
     }
-    
+
 
     $.ajax({
         type: 'POST',
         url: './getData.do',
-        data: {type: "usuario", metodo: "registrar", email:email, nombre:nombre,apellidos:apellidos, permisos:permisos, password:password},
+        data: {type: "usuario", metodo: "registrar", email: email, nombre: nombre, apellidos: apellidos, permisos: permisos, password: password},
         success: function(result) {
-            var data = {type: "usuario", metodo: "registrar", email:email, nombre:nombre,apellidos:apellidos, permisos:permisos, password:password};
+            var data = {type: "usuario", metodo: "registrar", email: email, nombre: nombre, apellidos: apellidos, permisos: permisos, password: password};
             console.log(data);
             console.log(result);
             if (!result.error) {
@@ -468,7 +485,7 @@ $('button[name=btnadduser]').click(function() {
             var message = JSON.stringify(e);
             console.log("error:" + message);
 
-            
+
             $('#signupalert span').html(message);
             $('#signupalert span').show();
             clearUserForm();

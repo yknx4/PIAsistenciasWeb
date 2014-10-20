@@ -16,12 +16,6 @@
                             <h3 class="panel-title">Please Sign In</h3>
                         </div>
                         <div class="panel-body">
-                            <c:if test="${not empty sessionScope.loginError}">
-                                <div class="alert alert-danger alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">${sessionScope.loginError}</button>
-                                    <html:errors />
-                                </div>
-                            </c:if>
                             <form role="form" name="LoginForm" method="post" action="${pageContext.request.contextPath}/Login.do">
                                 <fieldset>
                                     <div class="form-group">
