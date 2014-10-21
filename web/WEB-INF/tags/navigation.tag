@@ -133,14 +133,14 @@
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/Attendance.do<c:if test="${not empty sessionScope.isAdmin}">?user=self</c:if>"><i class="fa fa-table fa-fw"></i> Asistencias</a>
-                </li>
+                    </li>
                 <c:if test="${not empty sessionScope.isProfessor}">
                     <li>
                         <a href="${pageContext.request.contextPath}/Calendar.do<c:if test="${not empty sessionScope.isAdmin}">?user=self</c:if>"><i class="fa fa-calendar fa-fw"></i> Horario</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/PersonalStats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas</a>
-                    </li>
+                        </li>
+                        <li>
+                            <a href="${pageContext.request.contextPath}/PersonalStats.do<c:if test="${not empty sessionScope.isAdmin}">?user=self</c:if>"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas</a>
+                        </li>
                 </c:if>
                 <c:if test="${not empty sessionScope.isAdmin}">
                     <li class="divider"></li>
@@ -149,8 +149,8 @@
                     <li class="divider"></li>
                     <li class="divider"></li>
                     <li>
-                    <a href="${pageContext.request.contextPath}/Attendance.do"><i class="fa fa-table fa-fw"></i> Asistencias</a>
-                </li>
+                        <a href="${pageContext.request.contextPath}/Attendance.do"><i class="fa fa-table fa-fw"></i> Asistencias</a>
+                    </li>
                     <li>
                         <a href="${pageContext.request.contextPath}/Calendar.do"><i class="fa fa-calendar fa-fw"></i> Horarios</a>
                     </li>
@@ -161,7 +161,7 @@
                                 <a href="flot.html">General</a>
                             </li>
                             <li>
-                                <a href="morris.html">Por Usuario</a>
+                                <a href="${pageContext.request.contextPath}/PersonalStats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Por Usuario</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -178,7 +178,7 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-                    
+
                 </c:if>
                 <!--                            <li>
                                                 <a href="tables.html"><i class="fa fa-wrench fa-fw"></i> Control de Grupos</a>

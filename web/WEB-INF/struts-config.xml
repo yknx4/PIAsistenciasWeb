@@ -26,10 +26,13 @@
         <forward name="managenew"  path="/ManageNe.do"/>
         <forward name="manageexisting"  path="/ManageExisting.do"/>
         <forward name="getData"  path="/getData.do"/>
+        <forward name="personalstats"  path="/PersonalStats.do"/>
     </global-forwards>
 
     <action-mappings>
-        
+        <action path="/PersonalStats" scope="request" type="com.arekar.attendance.struts.actions.PersonalStatsAction">
+            <forward name="success" path="/statsPersonalStruts.jsp" />
+        </action>
         <action path="/Index" forward="/indexStruts.jsp"/>
         <action path="/ManageNew" forward="/manageNewStruts.jsp"/>
         <action path="/ManageExisting" scope="request" type="com.arekar.attendance.struts.actions.ManageExistingAction">
