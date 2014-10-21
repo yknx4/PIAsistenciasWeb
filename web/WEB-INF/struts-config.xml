@@ -27,6 +27,7 @@
         <forward name="manageexisting"  path="/ManageExisting.do"/>
         <forward name="getData"  path="/getData.do"/>
         <forward name="personalstats"  path="/PersonalStats.do"/>
+        <forward name="stats"  path="/Stats.do"/>
     </global-forwards>
 
     <action-mappings>
@@ -44,6 +45,9 @@
         <action path="/Failure" forward="/failure.jsp"/>
         <action path="/Attendance" type="com.arekar.attendance.struts.actions.AttendanceAction">
             <forward name="success" path="/attendanceStruts.jsp" />
+        </action>
+        <action path="/Stats" type="com.arekar.attendance.struts.actions.StatsAction">
+            <forward name="success" path="/statsStruts.jsp" />
         </action>
         <action path="/Calendar" scope="session" type="com.arekar.attendance.struts.actions.PrintHorarioMaestroAction">
             <forward name="success" path="/calendarStruts.jsp" />

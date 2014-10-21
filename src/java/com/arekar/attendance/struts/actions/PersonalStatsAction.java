@@ -43,30 +43,28 @@ public class PersonalStatsAction extends Action {
         if (admin) {
             if (user != null && !user.isEmpty()) {
                 System.out.println(user);
-                
+
                 if (!user.equals("self")) {
                     maestro = Integer.parseInt(user);
-                    
-                }else{
+                } else {
                     request.setAttribute("isSelf", true);
                 }
-                List<User> mUsers = UserController.getUsers();
-            List<User> profUsers = new ArrayList<>(); 
-            for(User u:mUsers){
-                if (u.hasPermission(User.PROFESSOR)) profUsers.add(u);
+
+            }
+            List<User> mUsers = UserController.getUsers();
+            List<User> profUsers = new ArrayList<>();
+            for (User u : mUsers) {
+                if (u.hasPermission(User.PROFESSOR)) {
+                    profUsers.add(u);
+                }
             }
             request.setAttribute("listUsers", profUsers);
-            }
-            User mUser = UserController.getUser(maestro);
-            request.setAttribute("nombreMaestro", mUser.getName());
-            
-                    
-            
-            
+
         }
+        User mUser = UserController.getUser(maestro);
+        request.setAttribute("nombreMaestro", mUser.getName());
 
-        
-
-        return mapping.findForward("success");
+        return mapping.findForward(
+                "success");
     }
 }

@@ -6,6 +6,7 @@
 package com.arekar.attendance.struts.actions;
 
 import com.arekar.attendance.model.db.stats.BaseStats;
+import com.arekar.attendance.util.StrutsUtility;
 import controller.SQLData.Parser.HorariosParse;
 import helper.Utility;
 import static helper.Utility.isDebug;
@@ -92,33 +93,7 @@ public class AttendanceAction extends Action {
         request.setAttribute("h1", h1);
         request.setAttribute("h2", h2);
         request.setAttribute("dia", dia);
-        GregorianCalendar cale= (GregorianCalendar) GregorianCalendar.getInstance();
-        boolean admin = request.getSession().getAttribute("isAdmin") != null;
-        int dYear=-1, dMonth=-1, dDay=-1;
-        Date toCall = cale.getTime();
-        year = request.getParameter("year");
-        month = request.getParameter("month");
-        day = request.getParameter("day");
-        if (year != null && !year.isEmpty()) {
-
-            dYear = Integer.parseInt(year);
-            System.out.println("Año: "+dYear+" -> "+year);
-        }
-        if (month != null && !month.isEmpty()) {
-
-            dMonth = Integer.parseInt(month);
-
-        }
-        if (day != null && !day.isEmpty()) {
-
-            dDay = Integer.parseInt(day);
-
-        }
-        if(dYear>1970) cale.set(GregorianCalendar.YEAR, dYear);
-        if(dMonth>=0) cale.set(GregorianCalendar.MONTH, dMonth);
-        if(dDay>0) cale.set(GregorianCalendar.DATE, dDay);
-        
-        toCall = cale.getTime();
+         boolean admin = request.getSession().getAttribute("isAdmin") != null;
         List<ClasesWeb> clases;
         ClasesWebDBData mDbData;
         if (admin) {
@@ -133,6 +108,7 @@ public class AttendanceAction extends Action {
         else {
             mDbData = new ClasesWebDBData(maestro);
         }
+        Date toCall = StrutsUtility.getPageDate(request);
         mDbData.setDateSpecific(true);
         mDbData.setDateQuery(toCall);
         mDbData.setAllDias(true);

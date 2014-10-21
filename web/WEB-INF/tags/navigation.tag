@@ -155,10 +155,10 @@
                         <a href="${pageContext.request.contextPath}/Calendar.do"><i class="fa fa-calendar fa-fw"></i> Horarios</a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/Stats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">General</a>
+                                <a href="${pageContext.request.contextPath}/Stats.do">General</a>
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/PersonalStats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Por Usuario</a>

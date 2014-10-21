@@ -9,14 +9,18 @@
 <t:dashboardTemplate ptitle="${requestScope.nombreMaestro}">
 
     <jsp:body>
-        <c:if test="${not empty sessionScope.isAdmin}">
-            <c:if test="${empty requestScope.isSelf}">
-                <div class="row">
-                    <div class="col-lg-2">
-                        <div class="well" id="titleContainer" >
-                            <div class="text-center">
+
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        General
+                    </div>
+                    <c:if test="${not empty sessionScope.isAdmin}">
+                        <c:if test="${empty requestScope.isSelf}">
+                            <div class="col-md-12 text-center" style="margin: 10px">
                                 <div class="dropdown">
-                                    <button class="btn btn-lg btn-outline btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    <button class="btn btn-outline btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
                                         Maestro
                                         <span class="caret"></span>
                                     </button>
@@ -32,17 +36,8 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-        </c:if>
-        <div class="row">
-            <div class="col-lg-offset-1 col-lg-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        General
-                    </div>
+                        </c:if>
+                    </c:if>
                     <!-- /.panel-heading -->
                     <div class="panel-body" >
                         <div class="list-group" >
@@ -81,8 +76,8 @@
                                 <span class="pull-right text-muted small"><em>23 minutos</em>
                                 </span>
                             </span>
-                            
-                            
+
+
                         </div>
                     </div>
                     <!-- /.panel-body -->
@@ -93,23 +88,33 @@
             <div class="col-lg-offset-1 col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        
+                        Mensual
                     </div>
                     <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="form-group">
-                                            <label for="dia" class="col-md-3 control-label">Mes</label>
-                                            <div class="col-md-9">
-                                                <select class="form-control" required="true" name="dias">
-                                                    <option value="-1"></option>
-                                                    <option value="0">Lunes</option>
-                                                    <option value="1">Martes</option>
-                                                    <option value="2">Miercoles</option>
-                                                    <option value="3">Jueves</option>
-                                                    <option value="4">Viernes</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                    <div class="panel-body text-center">
+                        <form id ="monthform" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="dia" class="col-md-offset-2 col-md-3 control-label">Mes</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" required="true" name="dias">
+                                        <option value="0">Enero</option>
+                                        <option value="1">Febrero</option>
+                                        <option value="2">Marzo</option>
+                                        <option value="3">Abril</option>
+                                        <option value="4">Mayo</option>
+                                        <option value="5">Junio</option>
+                                        <option value="6">Julio</option>
+                                        <option value="7">Agosto</option>
+                                        <option value="8">Septiembre</option>
+                                        <option value="9">Octubre</option>
+                                        <option value="10">Noviembre</option>
+                                        <option value="11">Diciembre</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <div id="morris-donut-chart"></div>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -126,7 +131,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-
+                        <div id="morris-bar-chart"></div>
                     </div>
                     <!-- /.panel-body -->
                 </div>
