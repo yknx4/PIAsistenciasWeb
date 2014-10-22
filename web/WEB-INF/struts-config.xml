@@ -53,7 +53,7 @@
             <forward name="success" path="/calendarStruts.jsp" />
         </action>
         <action input="/welcomeStruts.jsp" name="LoginForm" path="/Login" scope="session" type="com.arekar.attendance.struts.actions.LoginAction">
-            <forward name="success" path="/Index.do" />
+            <forward name="success" path="/Calendar.do" />
             <forward name="admin" path="/AdminIndex.do" />
             <forward name="failure" path="/Failure.do" />
         </action>

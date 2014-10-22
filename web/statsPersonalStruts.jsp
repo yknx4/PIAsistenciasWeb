@@ -7,11 +7,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:dashboardTemplate ptitle="${requestScope.nombreMaestro}">
-
+     <jsp:attribute name="pcustomjs">
+       <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/statsPersonalData.js" type="text/javascript" ></script> 
+        
+    </jsp:attribute>
     <jsp:body>
 
         <div class="row">
-            <div class="col-lg-offset-1 col-lg-3">
+            <div class="col-lg-5">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         General
@@ -57,8 +60,8 @@
                                 </span>
                             </span>
                             <span href="#" class="list-group-item">
-                                <i class="fa fa-calendar fa-fw"></i> Clase mas ausente
-                                <span class="pull-right text-muted small"><em>Sistemas Embebidos</em>
+                                <i class="fa fa-calendar fa-fw"></i> Sistemas Embebidos
+                                <span class="pull-right text-muted small"><em>Clase mas ausente</em>
                                 </span>
                             </span>
                             <span href="#" class="list-group-item">
@@ -85,14 +88,14 @@
                 <!-- /.panel -->
             </div>
             <!-- /.col-lg-4 -->
-            <div class="col-lg-offset-1 col-lg-6">
+            <div class=" col-lg-7">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Mensual
+                        Semestral
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body text-center">
-                        <form id ="monthform" class="form-horizontal" role="form">
+<!--                        <form id ="monthform" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label for="dia" class="col-md-offset-2 col-md-3 control-label">Mes</label>
                                 <div class="col-md-4">
@@ -113,7 +116,7 @@
                                 </div>
                             </div>
                         </form>
-                        
+                        -->
                         <div id="morris-donut-chart"></div>
                     </div>
                     <!-- /.panel-body -->
@@ -124,7 +127,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-offset-1 col-lg-10 ">
+            <div class=" col-lg-11 ">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Asistencia

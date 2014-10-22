@@ -161,7 +161,7 @@
                                 <a href="${pageContext.request.contextPath}/Stats.do">General</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/PersonalStats.do"><i class="fa fa-bar-chart-o fa-fw"></i> Por Usuario</a>
+                                <a href="${pageContext.request.contextPath}/PersonalStats.do">nah xD,  Por Usuario</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

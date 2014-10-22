@@ -19,7 +19,7 @@
 
         <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/plugins/morris/raphael.min.js" type="text/javascript" ></script> 
         <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris.min.js" type="text/javascript" ></script> 
-        <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js" type="text/javascript" ></script> 
+        <!--<script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/plugins/morris/morris-data.js" type="text/javascript" ></script>--> 
         <jsp:invoke fragment="pcustomjs"/>
     </jsp:attribute>
 

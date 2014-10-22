@@ -6,6 +6,7 @@
 
 package com.arekar.attendance.struts.actions;
 
+import com.arekar.attendance.model.db.stats.BaseStats;
 import com.arekar.attendance.util.StrutsUtility;
 import helper.Utility;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,21 @@ public class StatsAction extends Action{
         SimpleDateFormat monthDateFormatter = new SimpleDateFormat("MM / yyyy");
         request.setAttribute("fechaBonita", monthDateFormatter.format(toCall));
         request.setAttribute("fechaSQL", Utility.MySQLDateFormatter.format(toCall));
+        BaseStats stats = new BaseStats(toCall); 
+        request.setAttribute("maestrosMas", stats.getProfesoresMas());
+        request.setAttribute("maestrosMenos", stats.getProfesoresMenos());
+        request.setAttribute("gruposMas", stats.getGrupoMas());
+        request.setAttribute("gruposMenos", stats.getGrupoMenos());
+        request.setAttribute("diasMas", stats.getDiaMas());
+        request.setAttribute("diasMenos", stats.getDiaMenos());
+        request.setAttribute("fechasMas", stats.getFechaMas());
+        request.setAttribute("fechasMenos", stats.getFechaMenos());
+        request.setAttribute("horariosMas", stats.getHorariomas());
+        request.setAttribute("horariosMenos", stats.getHorariomenos());
+        request.setAttribute("clasesMas", stats.getClasesmas());
+        request.setAttribute("clasesMenos", stats.getClasesmenos());
+        request.setAttribute("datosTabla", stats.getDatosJson());
+        //request.setAttribute("maestrosImpuntuales", stats.getProfesoresInpuntual());
         
         
         return mapping.findForward("success");
