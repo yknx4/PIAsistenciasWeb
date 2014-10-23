@@ -7,9 +7,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:dashboardTemplate ptitle="${requestScope.nombreMaestro}">
-     <jsp:attribute name="pcustomjs">
-       <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/statsPersonalData.js" type="text/javascript" ></script> 
-        
+    <jsp:attribute name="pcustomjs">
+        <script language="JavaScript" type="text/javascript" >
+            var objDatos = JSON.parse('${requestScope.datosTabla}');
+            console.log(objDatos);
+            Morris.Donut({
+                element: 'morris-donut-chart',
+                data: [{
+                        label: "Asistencias",
+                        value: ${requestScope.asistencias}
+                    }, {
+                        label: "Retardos",
+                        value: ${requestScope.retardos}
+                    }, {
+                        label: "Faltas",
+                        value: ${requestScope.faltas}
+                    }, {
+                        label: "Justificaciones",
+                        value: ${requestScope.justificaciones}
+                    }],
+                resize: true
+            });
+        </script> 
+        <script language="JavaScript" src="${pageContext.request.contextPath}/resources/js/statsPersonalData.js" type="text/javascript" ></script> 
+
     </jsp:attribute>
     <jsp:body>
 
@@ -46,17 +67,17 @@
                         <div class="list-group" >
                             <span href="#" class="list-group-item">
                                 <i class="fa fa-check fa-fw"></i> Asistencias
-                                <span class="pull-right text-muted small"><em>124</em>
+                                <span class="pull-right text-muted small"><em>${requestScope.asistencias}</em>
                                 </span>
                             </span>
                             <span href="#" class="list-group-item">
                                 <i class="fa fa-times fa-fw"></i> Faltas
-                                <span class="pull-right text-muted small"><em>6</em>
+                                <span class="pull-right text-muted small"><em>${requestScope.faltas}</em>
                                 </span>
                             </span>
                             <span href="#" class="list-group-item">
                                 <i class="fa fa-check-circle fa-fw"></i> Justificaciones
-                                <span class="pull-right text-muted small"><em>5</em>
+                                <span class="pull-right text-muted small"><em>${requestScope.justificaciones}</em>
                                 </span>
                             </span>
                             <span href="#" class="list-group-item">
@@ -95,27 +116,27 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body text-center">
-<!--                        <form id ="monthform" class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label for="dia" class="col-md-offset-2 col-md-3 control-label">Mes</label>
-                                <div class="col-md-4">
-                                    <select class="form-control" required="true" name="dias">
-                                        <option value="0">Enero</option>
-                                        <option value="1">Febrero</option>
-                                        <option value="2">Marzo</option>
-                                        <option value="3">Abril</option>
-                                        <option value="4">Mayo</option>
-                                        <option value="5">Junio</option>
-                                        <option value="6">Julio</option>
-                                        <option value="7">Agosto</option>
-                                        <option value="8">Septiembre</option>
-                                        <option value="9">Octubre</option>
-                                        <option value="10">Noviembre</option>
-                                        <option value="11">Diciembre</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
+                        <!--                        <form id ="monthform" class="form-horizontal" role="form">
+                                                    <div class="form-group">
+                                                        <label for="dia" class="col-md-offset-2 col-md-3 control-label">Mes</label>
+                                                        <div class="col-md-4">
+                                                            <select class="form-control" required="true" name="dias">
+                                                                <option value="0">Enero</option>
+                                                                <option value="1">Febrero</option>
+                                                                <option value="2">Marzo</option>
+                                                                <option value="3">Abril</option>
+                                                                <option value="4">Mayo</option>
+                                                                <option value="5">Junio</option>
+                                                                <option value="6">Julio</option>
+                                                                <option value="7">Agosto</option>
+                                                                <option value="8">Septiembre</option>
+                                                                <option value="9">Octubre</option>
+                                                                <option value="10">Noviembre</option>
+                                                                <option value="11">Diciembre</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
                         -->
                         <div id="morris-donut-chart"></div>
                     </div>

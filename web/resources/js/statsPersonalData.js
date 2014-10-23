@@ -1,44 +1,32 @@
 $(function() {
 
-  
-    Morris.Donut({
-        element: 'morris-donut-chart',
-        data: [{
-            label: "Asistencias",
-            value: 125
-        }, {
-            label: "Retardos",
-            value: 30
-        }, {
-            label: "Faltas",
-            value: 10
-        }, {
-            label: "Justificaciones",
-            value: 7
-        }],
-        resize: true
-    });
 
-    Morris.Bar({
+    var month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+
+    Morris.Line({
         element: 'morris-bar-chart',
-        data: [{
-            y: '2014-10-1',
-            a: 100,
-            b: 90,
-            c: 250,
-            d:35
-        }, {
-            y: '2014-10-2',
-            a: 100,
-            b: 90,
-            c: 250,
-            d:35
-        }],
-        xkey: 'y',
-        ykeys: ['a', 'b', 'c', 'd'],
-        labels: ['Asistencias', 'Retardos','Faltas', 'Justificaciones'],
+        data: objDatos.datos,
+        xkey: 'day',
+        ykeys: ['attends', 'late', 'ausent', 'justifications'],
+        labels: ['Asistencias', 'Retardos', 'Faltas', 'Justificaciones'],
         hideHover: 'auto',
-        resize: true
+        resize: true,
+        stacked: true,
+        xLabelFormat: function(x){return month[x.getMonth()] +" "+ x.getFullYear();},
+        smooth : false,
+        ymax : 150
     });
 
     reshape();
@@ -48,10 +36,10 @@ $(function() {
 
 $(document).ready(function() {
     reshape();
-    
+
 });
 
-function reshape(){
+function reshape() {
     var boxes = $('.panel .well');
     maxHeight = Math.max.apply(
             Math, boxes.map(function() {

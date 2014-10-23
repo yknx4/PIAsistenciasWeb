@@ -5,8 +5,11 @@
  */
 package com.arekar.attendance.struts.actions;
 
+import com.arekar.attendance.model.db.stats.PersonalStats;
+import com.arekar.attendance.util.StrutsUtility;
 import controller.SQLData.UserController;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +34,7 @@ public class PersonalStatsAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         boolean admin = request.getSession().getAttribute("isAdmin") != null;
+        Date toCall = StrutsUtility.getPageDate(request);
         user = request.getParameter("user");
         int maestro;
         try {
@@ -64,6 +68,15 @@ public class PersonalStatsAction extends Action {
         User mUser = UserController.getUser(maestro);
         request.setAttribute("nombreMaestro", mUser.getName());
 
+        PersonalStats stats = new PersonalStats(toCall,maestro); 
+        
+        
+        request.setAttribute("datosTabla", stats.getDatosJson());
+        request.setAttribute("asistencias", stats.getAsistencias());
+        request.setAttribute("faltas", stats.getFaltas());
+        request.setAttribute("retardos", stats.getRetardos());
+        request.setAttribute("justificaciones", stats.getJustificaciones());
+        
         return mapping.findForward(
                 "success");
     }
