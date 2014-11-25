@@ -89,7 +89,7 @@
                                             <td><p class="text-center">
 
                                                     <logic:equal name="rowAntes" property="asistio" value="true">&#10004; 
-                                                        <logic:equal name="rowAntes" property="late" value="true">&#9785; </logic:equal>
+                                                        <logic:equal name="rowAntes" property="late" value="true">&#8986; </logic:equal>
                                                     </logic:equal>
                                                         <logic:equal name="rowAntes" property="asistio" value="false">✘ </logic:equal>
                                                             
@@ -137,7 +137,7 @@
                                             <td><bean:write name="rowAhora" property="salon"/></td>
                                             <td><p class="text-center">
                                                     <logic:equal name="rowAhora" property="asistio" value="true">&#10004; </logic:equal>
-                                                    <logic:equal name="rowAhora" property="late" value="true">&#9785; </logic:equal>
+                                                    <logic:equal name="rowAhora" property="late" value="true">&#8986; </logic:equal>
                                                     </p></td>
                                             </tr>
                                     </logic:iterate>

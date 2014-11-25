@@ -30,7 +30,7 @@
 
     <ul class="nav navbar-top-links navbar-right">
 
-        <li class="dropdown">
+<!--        <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
@@ -87,9 +87,9 @@
                     </a>
                 </li>
             </ul>
-            <!-- /.dropdown-alerts -->
+             /.dropdown-alerts 
         </li>
-        <!-- /.dropdown -->
+         /.dropdown -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -122,12 +122,15 @@
 
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
+           
             <ul class="nav" id="side-menu">
+                 <c:if test="${not empty sessionScope.isProfessor}">
                 <li class="divider"></li>
                 <li class="divider"></li>
                 <li class="divider"></li>
                 <li class="divider"></li>
                 <li class="divider"></li>
+                <li class="text-primary text-center" style="padding: 8px"><i class="fa fa-user fa-fw"></i>Profesor</li>
                 <li>
                     <a href="${pageContext.request.contextPath}"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
                 </li>
@@ -142,12 +145,14 @@
                             <a href="${pageContext.request.contextPath}/PersonalStats.do<c:if test="${not empty sessionScope.isAdmin}">?user=self</c:if>"><i class="fa fa-bar-chart-o fa-fw"></i> Estadísticas</a>
                         </li>
                 </c:if>
+                        </c:if>
                 <c:if test="${not empty sessionScope.isAdmin}">
                     <li class="divider"></li>
                     <li class="divider"></li>
                     <li class="divider"></li>
                     <li class="divider"></li>
                     <li class="divider"></li>
+                    <li class="text-primary text-center" style="padding: 8px"><i class="fa fa-users fa-fw"></i>Administración</li>
                     <li>
                         <a href="${pageContext.request.contextPath}/Attendance.do"><i class="fa fa-table fa-fw"></i> Asistencias</a>
                     </li>
@@ -161,7 +166,7 @@
                                 <a href="${pageContext.request.contextPath}/Stats.do">General</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/PersonalStats.do">nah xD,  Por Usuario</a>
+                                <a href="${pageContext.request.contextPath}/PersonalStats.do">Por Usuario</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
